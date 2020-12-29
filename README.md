@@ -126,13 +126,25 @@ route add -net 0.0.0.0 netmask 0.0.0.0 gw 192.168.2.5
 ```
 ## D. Melakukan Konfigurasi DHCP.
 
-Pada file dhcpd.conf DHCP Server di **Mojokerto**
+Pada file dhcpd.conf DHCP Server di **Mojokerto**, dibuat pembagian IP client.
 
 ![image](https://user-images.githubusercontent.com/57692117/103285931-f4fc3180-4a11-11eb-9217-80b09178a9eb.png)
 
 ![image](https://user-images.githubusercontent.com/57692117/103285986-11986980-4a12-11eb-90e5-f1f06688fb9c.png)
 
 ![image](https://user-images.githubusercontent.com/57692117/103286029-296fed80-4a12-11eb-9125-35f77e1384d9.png)
+
+Pada file isc-dhcp-server di **Mojokerko** dilakukan penyesuaian interfacenya.
+
+![image](https://user-images.githubusercontent.com/57692117/103286242-76ec5a80-4a12-11eb-9eed-2e7556f3e2a8.png)
+
+Pada tiap-tiap router diinstall DHCP Relay, dan pada file isc-dhcp-relay dilakukan konfigurasi sebagai berikut.
+
+![image](https://user-images.githubusercontent.com/57692117/103286503-d5193d80-4a12-11eb-9baa-92895aa504c5.png)
+
+![image](https://user-images.githubusercontent.com/57692117/103286535-e6624a00-4a12-11eb-9166-ea6087733928.png)
+
+![image](https://user-images.githubusercontent.com/57692117/103286569-fc700a80-4a12-11eb-8664-57aec7ff5df7.png)
 
 
 Untuk pengaturan network interface tiap UML yang menggunakan DHCP dibuat sebagai berikut.
