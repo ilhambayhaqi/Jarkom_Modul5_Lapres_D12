@@ -126,6 +126,15 @@ route add -net 0.0.0.0 netmask 0.0.0.0 gw 192.168.2.5
 ```
 ## D. Melakukan Konfigurasi DHCP.
 
+Pada file dhcpd.conf DHCP Server di **Mojokerto**
+
+![image](https://user-images.githubusercontent.com/57692117/103285931-f4fc3180-4a11-11eb-9217-80b09178a9eb.png)
+
+![image](https://user-images.githubusercontent.com/57692117/103285986-11986980-4a12-11eb-90e5-f1f06688fb9c.png)
+
+![image](https://user-images.githubusercontent.com/57692117/103286029-296fed80-4a12-11eb-9125-35f77e1384d9.png)
+
+
 Untuk pengaturan network interface tiap UML yang menggunakan DHCP dibuat sebagai berikut.
 
 - **SIDOARJO**
@@ -190,9 +199,11 @@ iptables -A LOGGING -j DROP
 ```
 
 - Sebelum diberlakukan iptables
+
 ![image](https://user-images.githubusercontent.com/57692117/103285638-4821b480-4a11-11eb-9feb-891e54ea3383.png)
 
 - Setelah diberlakukan iptables
+
 ![image](https://user-images.githubusercontent.com/57692117/103285686-6c7d9100-4a11-11eb-95ad-7aca066415cd.png)
 
 Dibuatkan variable baru dengan nama ```LOGGING```, dimana nantinya akan digunakan dalam pembuatan log. Karena IP Address yang dituju
