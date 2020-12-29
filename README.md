@@ -15,30 +15,7 @@ Pada modul ini, kami menggunakan pembagian IP dengan VSLM dimana untuk tabel pem
 
 ![messageImage_1608734255098](https://user-images.githubusercontent.com/57692117/103269431-6f17c080-49e8-11eb-9df0-e589b96d3779.jpg)
 
-## C. Melakukan Routing
-
-Untuk routing dilakukan pada UML **SURABAYA**, **BATU**, dan **KEDIRI** sebagai berikut.
-
-- **SURABAYA**
-```
-route add -net 192.168.0.0 netmask 255.255.255.0 gw 192.168.2.6
-route add -net 192.168.1.0 netmask 255.255.255.0 gw 192.168.2.2
-route add -net 192.168.2.8 netmask 255.255.255.248 gw 192.168.2.6
-route add -net 10.151.79.104 netmask 255.255.255.248 gw 192.168.2.2
-```
-
-- **BATU**
-```
-route add -net 0.0.0.0 netmask 0.0.0.0 gw 192.168.2.1
-```
-
-- **KEDIRI**
-```
-route add -net 0.0.0.0 netmask 0.0.0.0 gw 192.168.2.5
-```
-## D. Melakukan Konfigurasi Interfaces.
-
-Untuk pengaturan network interface tiap UML dibuat sebagai berikut.
+Konfigurasi untuk interface tiap UML(tanpa DHCP) sebagai berikut.
 
 - **SURABAYA**
 ```
@@ -126,6 +103,30 @@ address 10.151.79.107
 netmask 255.255.255.248
 gateway 10.151.79.105
 ```
+## C. Melakukan Routing
+
+Untuk routing dilakukan pada UML **SURABAYA**, **BATU**, dan **KEDIRI** sebagai berikut.
+
+- **SURABAYA**
+```
+route add -net 192.168.0.0 netmask 255.255.255.0 gw 192.168.2.6
+route add -net 192.168.1.0 netmask 255.255.255.0 gw 192.168.2.2
+route add -net 192.168.2.8 netmask 255.255.255.248 gw 192.168.2.6
+route add -net 10.151.79.104 netmask 255.255.255.248 gw 192.168.2.2
+```
+
+- **BATU**
+```
+route add -net 0.0.0.0 netmask 0.0.0.0 gw 192.168.2.1
+```
+
+- **KEDIRI**
+```
+route add -net 0.0.0.0 netmask 0.0.0.0 gw 192.168.2.5
+```
+## D. Melakukan Konfigurasi DHCP.
+
+Untuk pengaturan network interface tiap UML yang menggunakan DHCP dibuat sebagai berikut.
 
 - **SIDOARJO**
 ```
