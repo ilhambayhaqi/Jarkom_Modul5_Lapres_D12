@@ -82,7 +82,7 @@ address 10.151.79.105
 netmask 255.255.255.248
 ```
 
-- KEDIRI
+- **KEDIRI**
 ```
 auto lo
 iface lo inet loopback
@@ -103,7 +103,7 @@ address 192.168.0.1
 netmask 255.255.255.0
 ```
 
-- MALANG
+- **MALANG**
 ```
 auto lo
 iface lo inet loopback
@@ -115,7 +115,7 @@ netmask 255.255.255.248
 gateway 10.151.79.105
 ```
 
-- MOJOKERTO
+- **MOJOKERTO**
 ```
 auto lo
 iface lo inet loopback
@@ -127,7 +127,7 @@ netmask 255.255.255.248
 gateway 10.151.79.105
 ```
 
-- SIDOARJO
+- **SIDOARJO**
 ```
 auto lo
 iface lo inet loopback
@@ -136,7 +136,7 @@ auto eth0
 iface eth0 inet dhcp
 ```
 
-- GRESIK
+- **GRESIK**
 ```
 auto lo
 iface lo inet loopback
@@ -145,7 +145,7 @@ auto eth0
 iface eth0 inet dhcp
 ```
 
-- PROBOLINGGO
+- **PROBOLINGGO**
 ```
 auto lo
 iface lo inet loopback
@@ -154,7 +154,7 @@ auto eth0
 iface eth0 inet dhcp
 ```
 
-- MADIUN
+- **MADIUN**
 ```
 auto lo
 iface lo inet loopback
