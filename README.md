@@ -36,7 +36,7 @@ route add -net 0.0.0.0 netmask 0.0.0.0 gw 192.168.2.1
 ```
 route add -net 0.0.0.0 netmask 0.0.0.0 gw 192.168.2.5
 ```
-## D. Melakukan pembagian IP dengan DHCP SERVER dan RELAY.
+## D. Melakukan Konfigurasi Interfaces.
 
 Untuk pengaturan network interface tiap UML dibuat sebagai berikut.
 
