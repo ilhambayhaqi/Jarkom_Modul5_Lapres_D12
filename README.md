@@ -164,3 +164,71 @@ auto eth0
 iface eth0 inet dhcp
 ```
 
+## Soal1
+
+Dikarenakan pada soal tidak diperbolehkan menggunakan MASQUERADE, maka kita menggunakan konfigurasi iptables sebagai berikut.
+
+- **SURABAYA**
+```
+iptables -t nat -A POSTROUTING -o eth0 -j SNAT --to-source 10.151.78.54 
+```
+
+Semua paket yang menuju keluar melalui eth0 akan dirubah source IP address nya menjadi 10.151.78.54.
+
+## Soal2 & Soal7
+
+Diminta untuk drop semua akses SSH dari luar Topologi yang menuju DHCP dan DNS SERVER (MOJOKERTO & MALANG)
+Diminta untuk melakukan konfigurasi iptables pada UML SURABAYA.
+Untuk Soal7 diminta untuk melakukan log pada setiap paket yang didrop
+
+- **SURABAYA**
+```
+iptables -N LOGGING
+iptables -A FORWARD -p tcp --dport 22 -d 10.151.79.104/29 -i eth0 -j LOGGING
+iptables -A LOGGING -j LOG --log-prefix "IPTables-Dropped: "
+iptables -A LOGGING -j DROP
+```
+
+Dibuatkan variable baru dengan nama ```LOGGING```, dimana nantinya akan digunakan dalam pembuatan log. Karena IP Address yang dituju
+MOJOKERTO dan MALANG yang jika kita lihat dari Topologi bahwa mereka melewati SURABAYA, maka di SURABAYA digunakan chain FORWARD.
+Semua paket yang masuk melalui eth0 dengan menggunakan protokol tcp dan menuju port 22 serta menuju subnet 10.151.79.104/29, akan
+didrop dan log nya akan ditampilkan pada UML SURABAYA.
+
+## Soal3 & Soal7
+
+Diminta untuk membatasi akses koneksi ke DHCP dan DNS Server (MOJOKERTO dan MALANG) sebanyak tiga koneksi dengan protokol ICMP, selebihnya didrop
+
+- **MOJOKERTO**
+```
+iptables -N LOGGING
+iptables -A INPUT -p icmp -m connlimit --connlimit-above 3 --connlimit-mask 0 -j LOGGING
+iptables -A LOGGING -j LOG --log-prefix "IPTables-Dropped: "
+iptables -A LOGGING -j DROP
+```
+
+- **MALANG**
+```
+iptables -N LOGGING
+iptables -A INPUT -p icmp -m connlimit --connlimit-above 3 --connlimit-mask 0 -j LOGGING
+iptables -A LOGGING -j LOG --log-prefix "IPTables-Dropped: "
+iptables -A LOGGING -j DROP
+```
+
+Sama seperti penjelasan sebelumnya mengenai LOGGING. Disini kita buatkan konfigurasi dimana setiap paket yang masuk dengan menggunakan
+protokol ICMP akan dibatasi koneksinya maksimal sebanyak tiga koneksi, selebihnya akan di drop.
+
+## Soal4 & Soal5
+
+Diminta untuk membatasi akses ke MALANG yang berasal dari subnet SIDOARJO dan GRESIK pada jam tertentu.
+
+- **MALANG**
+```
+iptables -A INPUT -s 192.168.1.0/24 -m time --timestart 07:00 --timestop 17:00 --weekdays Mon,Tue,Wed,Thu,Fri -j ACCEPT #4
+iptables -A INPUT -s 192.168.0.0/24 -m time --timestart 17:00 --timestop 23:59 -j ACCEPT #5
+iptables -A INPUT -s 192.168.0.0/24 -m time --timestart 00:00 --timestop 07:00 -j ACCEPT #5
+iptables -A INPUT -j REJECT #4
+```
+
+Terdapat dua source IP Address yang akan dilimitasi akses waktunya, dimana keduanya itu ialah IP Address SIDOARJO dan GRESIK.
+Untuk subnet SIDOARJO dapat diakses pada pukul 07.00 - 17.00 pada hari Senin sampai Jumat, dan subnet GRESIK pada pukul 17.00
+sampai 07.00 setiap harinya.
