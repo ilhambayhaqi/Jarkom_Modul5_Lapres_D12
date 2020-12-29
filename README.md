@@ -189,6 +189,12 @@ iptables -A LOGGING -j LOG --log-prefix "IPTables-Dropped: "
 iptables -A LOGGING -j DROP
 ```
 
+- Sebelum diberlakukan iptables
+![image](https://user-images.githubusercontent.com/57692117/103285638-4821b480-4a11-11eb-9feb-891e54ea3383.png)
+
+- Setelah diberlakukan iptables
+![image](https://user-images.githubusercontent.com/57692117/103285686-6c7d9100-4a11-11eb-95ad-7aca066415cd.png)
+
 Dibuatkan variable baru dengan nama ```LOGGING```, dimana nantinya akan digunakan dalam pembuatan log. Karena IP Address yang dituju
 MOJOKERTO dan MALANG yang jika kita lihat dari Topologi bahwa mereka melewati SURABAYA, maka di SURABAYA digunakan chain FORWARD.
 Semua paket yang masuk melalui eth0 dengan menggunakan protokol tcp dan menuju port 22 serta menuju subnet 10.151.79.104/29, akan
@@ -232,3 +238,15 @@ iptables -A INPUT -j REJECT #4
 Terdapat dua source IP Address yang akan dilimitasi akses waktunya, dimana keduanya itu ialah IP Address SIDOARJO dan GRESIK.
 Untuk subnet SIDOARJO dapat diakses pada pukul 07.00 - 17.00 pada hari Senin sampai Jumat, dan subnet GRESIK pada pukul 17.00
 sampai 07.00 setiap harinya.
+
+## Soal 6
+
+Membuat Konfigurasi Firewall pada **SURABAYA** untuk melakukan load balancer ketika client mengakses IP Malang akan dialihkan menuju Probolinggo atau Madiun
+- **SURABAYA**
+
+```
+iptables -A PREROUTING -t nat -p tcp -d 10.151.79.106 -m statistic --mode nth --every 2 --packet 0 -j DNAT --to-destination 192.168.2.10:80
+iptables -A PREROUTING -t nat -p tcp -d 10.151.79.106 -j DNAT --to-destination 192.168.2.11:80
+```
+![image](https://user-images.githubusercontent.com/57692117/103285450-c29e0480-4a10-11eb-8c25-214c9b4526b7.png)
+
